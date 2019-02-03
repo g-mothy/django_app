@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from listings.choices import price_choices, state_choices, event_list
 
 from listings.models import Listing
 from realtors.models import Realtor
@@ -8,7 +9,10 @@ def index(request):
     listings = Listing.objects.filter(is_published=True)[:3]
 
     context ={
-        'listings': listings
+        'listings': listings,
+        'state_choices': state_choices,
+        'price_choices': price_choices,
+        'event_list': event_list
     }
 
     return render(request,'pages/index.html', context)
