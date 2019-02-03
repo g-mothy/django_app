@@ -39,15 +39,23 @@
           <img src="{% static 'img/about.png' %}" alt="">
         </div>
         <div class="col-md-4">
-          <div class="card">
-            <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month">
-            <div class="card-body">
-              <h5 class="card-title">Best college of the year</h5>
-              <h6 class="text-secondary">None</h6>
-              <p class="card-text">The college which won the maximum number of positions.
-              </p>
+          {% if mvp_realtors %}
+           {% for realtor in mvp_realtors %}
+              <div class="card">
+              <img class="card-img-top" src="{{ realtor.photo.url }}" alt="Technical Head" width="200" height="200">
+              <div class="card-body">
+                <h5 class="card-title">Technical Head of the college </h5>
+                <h6 class="fas fa-name">Name: {{ realtor.name }}</h6><br>
+                 <h6 class="fas fa-phone"> Mobile No: {{ realtor.phone }}</h6>
+                 <h6 class="fas fa-envelope-open"> Email Id: {{ realtor.email }}</h6>
+                <p class="card-text"> Any queries contact the technical head of AIT.
+                </p>
+              </div>
             </div>
-          </div>
+            <br>
+            <br>
+           {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -55,10 +63,10 @@
 
   <!-- Work -->
   <section id="work" class="bg-dark text-white text-center">
-    <h2 class="display-4">We Work For You</h2>
-    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
+    <h2 class="display-4">Theme</h2>
+    <h4>Description of the Theme</h4>
     <hr>
-    <a href="listings.html" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+    <a href="{% url 'listings' %}" class="btn btn-secondary text-white btn-lg">View Our Events</a>
   </section>
 
   <!-- Team -->
@@ -66,39 +74,26 @@
     <div class="container">
       <h2 class="text-center">Our Team</h2>
       <div class="row text-center">
-        <div class="col-md-4">
-          <img src="assets/img/realtors/kyle.jpg" alt="" class="rounded-circle mb-3">
-          <h4>Kyle Brown</h4>
-          <p class="text-success">
-            <i class="fas fa-award text-success mb-3"></i> Realtor</p>
-          <hr>
-          <p>
-            <i class="fas fa-phone"></i> (555)-555-5555</p>
-          <p>
-            <i class="fas fa-envelope-open"></i> kyle@btrealestate.co</p>
-        </div>
+        {% if realtors %}
+          {% for realtor in realtors %}
+             <div class="col-md-4">
+              <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-4" width="180" height="280">
+              <h4>{{ realtor.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i>Event Coordinator </p>
+              <hr>
+              <p>
+                <i class="fas fa-phone"></i>{{ realtor.phone }}</p>
+              <p>
+                <i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
+             </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Realtors Available</p>
+          </div>
+        {% endif %}
 
-        <div class="col-md-4">
-          <img src="assets/img/realtors/mark.jpg" alt="" class="rounded-circle mb-3">
-          <h4>Mark Hudson</h4>
-          <p class="text-success">Realtor</p>
-          <hr>
-          <p>
-            <i class="fas fa-phone"></i> (444)-444-4444</p>
-          <p>
-            <i class="fas fa-envelope-open"></i> mark@btrealestate.co</p>
-        </div>
-
-        <div class="col-md-4">
-          <img src="assets/img/realtors/jenny.jpg" alt="" class="rounded-circle mb-3">
-          <h4>Jenny Johnson</h4>
-          <p class="text-success">Realtor</p>
-          <hr>
-          <p>
-            <i class="fas fa-phone"></i> (333)-333-3333</p>
-          <p>
-            <i class="fas fa-envelope-open"></i> jenny@btrealestate.co</p>
-        </div>
       </div>
     </div>
   </section>
